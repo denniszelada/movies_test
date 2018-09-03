@@ -1,0 +1,8 @@
+"0","# Number of movies per year/decade"
+"0","movies_per_director <- Movie_Movies %>%"
+"0","  na.omit(movies_per_director) %>% # omit missing values"
+"0","  select(imdbID, Director) %>% # select columns we need"
+"0","  group_by(Director) %>% # group by director"
+"0","  summarise(count = n())  %>% # count movies per director"
+"0","  arrange(desc(count))"
+"0","knitr::kable(head(movies_per_director, 10))"

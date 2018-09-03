@@ -1,0 +1,4 @@
+"0","movies_per_year %>%"
+"0","  ggplot(aes(x = count, y = Year)) +"
+"0","  geom_line(color=""blue"") + "
+"0","  scale_x_continuous(limits = c(0, 10))"

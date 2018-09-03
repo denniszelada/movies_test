@@ -1,0 +1,4 @@
+"0","# Check NA's"
+"0","na_movies <- Movie_Movies %>%"
+"0","  filter(is.na(Year))"
+"0","knitr::kable(head(na_movies, 10))"

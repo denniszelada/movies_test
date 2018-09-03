@@ -1,0 +1,6 @@
+"0","# Check NA's"
+"0","na_movies <- Movie_Movies %>%"
+"0","  filter(is.na(Year))"
+"2","Error in Movie_Movies %>% filter(is.na(Year)) : 
+  could not find function ""%>%""
+"

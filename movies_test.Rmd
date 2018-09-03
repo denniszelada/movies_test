@@ -1,0 +1,129 @@
+---
+title: "R Movies"
+output: html_notebook
+---
+
+## Data Source
+
+> The data source is located [here](https://www.kaggle.com/beyjin/movies-1990-to-2017/home).
+
+### Packages
+```{r packages, results='hide'}
+library(dplyr)
+library(stringr)
+library(ggplot2)
+```
+
+### Overview
+
+This is an analisis about the movies dataset
+
+### Download
+
+The data needs to be downloaded and unzipped.
+
+```{r, echo=T}
+url <- "https://www.kaggle.com/beyjin/movies-1990-to-2017/downloads/"
+data_folder <- "data"
+archive_type <- ".zip"
+
+dataset <- "movies-1990-to-2017"
+dataset_zip <- paste0("movies-1990-to-2017", archive_type)
+
+# Download the data
+if (!file.exists(file.path(data_folder, dataset_zip))) {
+  download.file(paste0(url, dataset), file.path(data_folder, dataset_zip))
+}
+
+# unzip data
+unzip(file.path(data_folder, dataset_zip), exdir = data_folder, overwrite = F)
+
+# Display the unzipped files
+list.files('data/', recursive=T)
+```
+## Loading the dataset
+
+```{r, echo=T}
+dataset_files <- c("Movie_Actors", "Movie_AdditionalRating", "Movie_Genres", "Movie_Movies", "Movie_Writer")
+suffix <- ".csv"
+
+for (f in dataset_files) {
+  path <- file.path(data_folder, paste0(f, suffix))
+  assign(f, read.csv(path))
+  print(paste(f, "object size is", format(object.size(get(f)),units="Mb")))
+}
+```
+
+## Movie analisis
+
+We are going to analize some interesting data from movies.
+
+### Cleaning N/A data
+
+```{r}
+# Check NA's
+na_movies <- Movie_Movies %>%
+  filter(is.na(Year))
+
+knitr::kable(head(na_movies, 10))
+```
+
+```{r}
+# Check NA's
+na_movies <- Movie_Movies %>%
+  filter(is.na(Year))
+
+knitr::kable(head(na_movies, 10))
+```
+
+### Converting to integers year data
+
+```{r warning=T}
+# Check NA's
+integer_movies_per_year <- Movie_Movies %>%
+  #if_else()
+  select(Year)
+  #str_length(Year)
+  #mutate(Year = if_else(str_length(Year) > 4, as.integer(str_split(Year, "-", simplify = T)[1]), as.integer(Year)))
+  #stri_length(Year)
+  #mutate(Year = as.integer(Year))
+```
+
+### Number of movies produced by top 10 director's?
+
+The first question that may be asked is how many movies were produced by the top 10 directors.
+```{r}
+# Number of movies per year/decade
+movies_per_director <- Movie_Movies %>%
+  na.omit(movies_per_director) %>% # omit missing values
+  select(imdbID, Director) %>% # select columns we need
+  group_by(Director) %>% # group by director
+  summarise(count = n())  %>% # count movies per director
+  arrange(desc(count))
+
+knitr::kable(head(movies_per_director, 10))
+```
+
+### How many movies were produced per year?
+
+The first question that may be asked is how many movies were produced year by year. We can easily extract this information from the `movies_df` data frame.
+```{r}
+# Number of movies per year/decade
+movies_per_year <- Movie_Movies %>%
+  na.omit() %>% # omit missing values
+  select(imdbID, Year) %>% # select columns we need
+  group_by(Year) %>% # group by year
+  summarise(count = n())  %>% # count movies per year
+  arrange(Year)
+
+knitr::kable(head(movies_per_year, 20))
+```
+
+
+ That's better. Now let's plot what we have.
+```{r q1-2}
+movies_per_year %>%
+  ggplot(aes(x = count, y = Year)) +
+  geom_line(color="blue") + 
+  scale_x_continuous(limits = c(0, 10))
+```

@@ -1,0 +1,8 @@
+"0","# Check NA's"
+"0","integer_movies_per_year <- Movie_Movies %>%"
+"0","  #if_else()"
+"0","  select(Year)"
+"0","  #str_length(Year)"
+"0","  #mutate(Year = if_else(str_length(Year) > 4, as.integer(str_split(Year, ""-"", simplify = T)[1]), as.integer(Year)))"
+"0","  #stri_length(Year)"
+"0","  #mutate(Year = as.integer(Year))"

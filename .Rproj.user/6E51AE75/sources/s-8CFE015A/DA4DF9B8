@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1535907851291.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2698237737",
+    "id" : "DA4DF9B8",
+    "lastKnownWriteTime" : 1535918649,
+    "last_content_update" : 1535918649193,
+    "path" : "~/projects/r/movies_test/movies_test.Rmd",
+    "project_path" : "movies_test.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "127,9",
+        "scrollLine" : "120",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

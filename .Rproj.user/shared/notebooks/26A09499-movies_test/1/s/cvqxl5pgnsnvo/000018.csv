@@ -1,0 +1,8 @@
+"0","# Number of movies per year/decade"
+"0","movies_per_year <- Movie_Movies %>%"
+"0","  na.omit() %>% # omit missing values"
+"0","  select(imdbID, Year) %>% # select columns we need"
+"0","  group_by(Year) %>% # group by year"
+"0","  summarise(count = n())  %>% # count movies per year"
+"0","  arrange(Year)"
+"0","knitr::kable(head(movies_per_year, 20))"
